@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Roda primeiro, antes de gastar tempo instalando/buildando: FAIL para
+      # o job aqui (.env versionado, secret aparente, placeholder esquecido,
+      # etc). WARN aparece no log mas não bloqueia. Ver validate-standard.ps1.
+      - name: Validar padrão (validate-standard)
+        shell: pwsh
+        run: ./scripts/validate-standard.ps1 -Path .
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # --if-present: cada app/pacote declara (ou não) esses scripts; nada
+      # quebra quando um projeto não tem, por exemplo, apps/mobile.
+      - name: Lint
+        run: pnpm -r --if-present run lint
+
+      - name: Typecheck
+        run: pnpm -r --if-present run typecheck
+
+      - name: Test
+        run: pnpm -r --if-present run test
+
+      - name: Build
+        run: pnpm -r --if-present run build

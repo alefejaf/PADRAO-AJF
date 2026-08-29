@@ -1,0 +1,42 @@
+# Dependências
+node_modules/
+**/node_modules/
+
+# Builds
+.next/
+**/.next/
+dist/
+**/dist/
+coverage/
+**/coverage/
+
+# Variáveis reais
+.env
+.env.local
+.env.*.local
+**/.env
+**/.env.local
+**/.env.*.local
+
+# Temporários / backups
+*.backup
+*.bak
+*.tmp
+*.quebrado
+*.backup-*
+create-project.ps1.backup-*
+create-project.ps1.quebrado
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# pnpm
+.pnpm-store/
+
+# Expo
+.expo/
+**/.expo/
+
+# TypeScript
+*.tsbuildinfo

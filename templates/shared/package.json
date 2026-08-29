@@ -1,0 +1,27 @@
+{
+  "name": "@{{PROJECT_SLUG}}/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Types, schemas (Zod) and constants shared across apps of {{PROJECT_NAME}}.",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.5.0",
+    "@typescript-eslint/parser": "^8.5.0",
+    "eslint": "^9.9.1",
+    "typescript": "^6.0.3",
+    "vitest": "^3.0.0"
+  }
+}
